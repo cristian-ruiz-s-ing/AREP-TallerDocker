@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calculadora de Seno</title>
+</head>
+<body>
+<h1>Funciones bono:</h1>
+<p>Seno: </p>
+<input type="number" id="valorSin" placeholder="Ingrese un valor">
+<button onclick="calcularSin()">Calcular</button>
+<p id="resultSin"></p>
+
+<p>Coseno: </p>
+<input type="number" id="valorCos" placeholder="Ingrese un valor">
+<button onclick="calcularCos()">Calcular</button>
+<p id="resultCos"></p>
+
+<p>Palindromo: </p>
+<input type="text" id="valorCadena" placeholder="Ingrese una palabra">
+<button onclick="palindromo()">Calcular</button>
+<p id="resultPalin"></p>
+
+<p>Magnitud de un vector: </p>
+<input type="number" id="valorVector1" placeholder="Ingrese el primer valor">
+<input type="number" id="valorVector2" placeholder="Ingrese el segundo valor">
+<button onclick="calcularVec()">Calcular</button>
+<p id="resultVec"></p>
+
+<script>
+        function calcularCos() {
+            const valor = document.getElementById("valorCos").value;
+
+            fetch(`http://localhost:4567/cos/${valor}`, {
+                method: 'GET',
+                mode: 'no-cors'
+                })
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("resultCos").textContent = `${data}`;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+
+        function calcularSin() {
+            const valor = document.getElementById("valorSin").value;
+            fetch(`http://localhost:4567/sin/${valor}`, {
+                method: 'GET',
+                mode: 'no-cors'
+                })
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("resultSin").textContent = `${data}`;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+
+        function palindromo() {
+            const valor = document.getElementById("valorCadena").value;
+            fetch(`http://localhost:4567/palindromo/${valor}`, {
+                method: 'GET',
+                mode: 'no-cors'
+                })
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("resultPalin").textContent = `${data}`;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+
+        function calcularVec() {
+            const valor1 = document.getElementById("valorVector1").value;
+            const valor2 = document.getElementById("valorVector2").value;
+
+            fetch(`http://localhost:4567/vector/${valor1}/${valor2}`, {
+                method: 'GET',
+                mode: 'no-cors'
+                })
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById("resultVec").textContent = `${data}`;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+    </script>
+</body>
+</html>
